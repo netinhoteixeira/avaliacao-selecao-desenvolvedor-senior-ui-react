@@ -26,7 +26,23 @@ async function loginUser(credentials) {
     });
 }
 
-export default function Login({setToken}) {
+async function getProfile(token) {
+    return fetch('http://162.243.174.113:8080/profile/me', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    }).then(data => {
+        if (data.ok) {
+            return data.json();
+        }
+
+        return null;
+    });
+}
+
+export default function Login({setSession}) {
     const [loginError, setLoginError] = useState();
     const [username, setUserName] = useState();
     const [password, setPassword] = useState();
@@ -40,10 +56,19 @@ export default function Login({setToken}) {
             'usuario': username,
             'senha': password
         });
-        setToken(token);
+        // setToken(token);
 
         if (token === null) {
             setLoginError(true);
+        } else {
+            const currentUser = await getProfile(token);
+            setSession({
+                token: token,
+                id: currentUser.id,
+                username: currentUser.usuario,
+                admin: currentUser.administrador,
+            });
+            console.log(currentUser);
         }
     };
 
@@ -51,11 +76,11 @@ export default function Login({setToken}) {
         <main className="form-signin">
             <form onSubmit={handleSubmit}>
                 <h1 className="h3 mb-3 fw-normal">Acesso Restrito</h1>
-                { loginError }
-                { loginError &&
-                    <div className="alert alert-danger" role="alert">
-                        <strong>Acesso não concedido!</strong> Verifique seus dados de acesso e tente novamente.
-                    </div>
+                {loginError}
+                {loginError &&
+                <div className="alert alert-danger" role="alert">
+                    <strong>Acesso não concedido!</strong> Verifique seus dados de acesso e tente novamente.
+                </div>
                 }
                 <div className="form-floating">
                     <input type="text" className="form-control" id="floatingInput"

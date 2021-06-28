@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Clientes() {
-    return(
+    return (
         <h2>Clientes</h2>
     );
 }

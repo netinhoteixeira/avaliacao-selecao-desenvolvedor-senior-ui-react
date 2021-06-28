@@ -1,27 +1,30 @@
-import React, {useState} from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import React from 'react';
+import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom';
 import './App.css';
-import useToken from './useToken';
+import useSession from './useSession';
 import Login from '../Login/Login';
 import Clientes from '../Clientes/Clientes';
 
 function App() {
-    const {token, setToken} = useToken();
+    const {session, setSession} = useSession();
 
     const exit = async e => {
         e.preventDefault();
-        setToken(null);
+        setSession(null);
     };
 
-    if (!token) {
-        return <Login setToken={setToken}/>
+    if (!session) {
+        return <Login setSession={setSession}/>
     }
 
     return (
         <div className="wrapper">
             <div className="header">
                 <h1>Avaliação para Seleção - Desenvolvedor Sênior</h1>
-                <a href="#" onClick={exit}>Sair</a>
+                <div>
+                    Seja bem vindo, <span>{session?.username}</span>&nbsp;|&nbsp;
+                    <a href="#" onClick={exit}>Sair</a>
+                </div>
             </div>
             <BrowserRouter>
                 <Switch>
