@@ -27,7 +27,9 @@ function App() {
                 <ul className="nav nav-pills">
                     <li className="nav-item"><span
                         className="nav-text">Seja bem vindo, <strong>{session?.username}</strong></span></li>
-                    <li className="nav-item"><a href="#" onClick={exit} className="nav-link active">Sair</a></li>
+                    <li className="nav-item">
+                        <button onClick={exit} type="button" className="btn btn-dark">Sair</button>
+                    </li>
                 </ul>
             </header>
             <main>
@@ -42,7 +44,7 @@ function App() {
                                 }}
                             />
                             <Route path="/clientes">
-                                <Clientes/>
+                                <Clientes session={session}/>
                             </Route>
                         </Switch>
                     </BrowserRouter>

@@ -1,4 +1,12 @@
-.App .nav-text {
+.App {
+}
+
+.App header {
+    padding-left: .8em;
+    padding-right: .8em !important;
+}
+
+.App header .nav-text {
     display: block;
     padding: .5rem 1rem;
     cursor: default;
