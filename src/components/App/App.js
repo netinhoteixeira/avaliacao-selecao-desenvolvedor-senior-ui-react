@@ -18,28 +18,36 @@ function App() {
     }
 
     return (
-        <div className="wrapper">
-            <div className="header">
-                <h1>Avaliação para Seleção - Desenvolvedor Sênior</h1>
-                <div>
-                    Seja bem vindo, <span>{session?.username}</span>&nbsp;|&nbsp;
-                    <a href="#" onClick={exit}>Sair</a>
+        <div className="App container">
+            <header className="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a href="/"
+                   className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+                    <span className="fs-4">Avaliação para Seleção - Desenvolvedor Sênior</span>
+                </a>
+                <ul className="nav nav-pills">
+                    <li className="nav-item"><span
+                        className="nav-text">Seja bem vindo, <strong>{session?.username}</strong></span></li>
+                    <li className="nav-item"><a href="#" onClick={exit} className="nav-link active">Sair</a></li>
+                </ul>
+            </header>
+            <main>
+                <div className="container">
+                    <BrowserRouter>
+                        <Switch>
+                            <Route
+                                exact
+                                path="/"
+                                render={() => {
+                                    return (<Redirect to="/clientes"/>);
+                                }}
+                            />
+                            <Route path="/clientes">
+                                <Clientes/>
+                            </Route>
+                        </Switch>
+                    </BrowserRouter>
                 </div>
-            </div>
-            <BrowserRouter>
-                <Switch>
-                    <Route
-                        exact
-                        path="/"
-                        render={() => {
-                            return (<Redirect to="/clientes"/>);
-                        }}
-                    />
-                    <Route path="/clientes">
-                        <Clientes/>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
+            </main>
         </div>
     );
 }

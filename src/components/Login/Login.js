@@ -56,7 +56,6 @@ export default function Login({setSession}) {
             'usuario': username,
             'senha': password
         });
-        // setToken(token);
 
         if (token === null) {
             setLoginError(true);
@@ -68,18 +67,17 @@ export default function Login({setSession}) {
                 username: currentUser.usuario,
                 admin: currentUser.administrador,
             });
-            console.log(currentUser);
         }
     };
 
     return (
-        <main className="form-signin">
+        <main className="Login form-signin">
             <form onSubmit={handleSubmit}>
                 <h1 className="h3 mb-3 fw-normal">Acesso Restrito</h1>
                 {loginError}
                 {loginError &&
                 <div className="alert alert-danger" role="alert">
-                    <strong>Acesso não concedido!</strong> Verifique seus dados de acesso e tente novamente.
+                    <strong>Acesso não concedido.</strong><br />Verifique seus dados de acesso e tente novamente.
                 </div>
                 }
                 <div className="form-floating">
