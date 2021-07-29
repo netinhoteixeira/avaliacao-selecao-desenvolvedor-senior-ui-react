@@ -19,3 +19,25 @@
 .Clientes tr td.record-tools button:last-child {
     margin-right: 0;
 }
+
+.Clientes tr.info {
+}
+
+.Clientes tr.info td {
+    padding-bottom: 1em;
+}
+
+.Clientes tr.info td .form-label {
+    font-weight: bold;
+}
+
+.Clientes tr.info td .form-control {
+    padding-left: 0;
+    border: none;
+    border-radius: 0;
+    text-align: justify;
+    cursor: default;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -97,5 +97,5 @@ export default function Login({setSession}) {
 }
 
 Login.propTypes = {
-    setToken: PropTypes.func.isRequired
+    setSession: PropTypes.func.isRequired
 };
